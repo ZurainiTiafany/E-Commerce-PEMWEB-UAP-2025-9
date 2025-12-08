@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\ProductCategory;
 
 class ProductCategorySeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class ProductCategorySeeder extends Seeder
             ['name' => 'Pulpen', 'slug' => 'pulpen'],
             ['name' => 'Buku', 'slug' => 'buku'],
             ['name' => 'Pensil', 'slug' => 'pensil'],
-            ['name' => 'Penghapus', 'slug' => 'penghapus'],
+            ['name' => 'Highlighter', 'slug' => 'highlighter'],
             ['name' => 'Washie Tape', 'slug' => 'washie-tape'],
         ];
 
