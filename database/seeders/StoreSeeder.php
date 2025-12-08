@@ -12,20 +12,13 @@ class StoreSeeder extends Seeder
      */
     public function run(): void
     {
-         $owner = User::where('email', 'elenorakriya@gmail.com')->first();
-
-         // Buat toko
-         Store::firstOrCreate(
-             ['user_id' => $owner->id], 
-             [
-                 'name' => 'Ethereal Stationary',
-                 'logo' => 'asset', 
-                 'about' => 'Menyediakan berbagai macam stationary dan perlengkapan belajar.',
-                 'phone' => '081234567890',
-                 'city' => 'Malang',
-                 'address' => 'Jl. Jakarta No. 23',
-                 'is_verified' => true,
-             ]
-         );
+        DB::table('stores')->insert([
+            'user_id' => 2,
+            'name' => 'Ethereal Stasionary',
+            'address' => 'Jl. Jakarta No.12, Malang, Jawa Timur',
+            'description' => 'Toko yang menyediakan berbagai macam stasionary.',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
