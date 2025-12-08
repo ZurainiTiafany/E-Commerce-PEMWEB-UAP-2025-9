@@ -12,6 +12,13 @@ class StoreSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('stores')->insert([
+            'user_id' => 2,
+            'name' => 'Ethereal Stasionary',
+            'address' => 'Jl. Jakarta No.12, Malang, Jawa Timur',
+            'description' => 'Toko yang menyediakan berbagai macam stasionary.',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
