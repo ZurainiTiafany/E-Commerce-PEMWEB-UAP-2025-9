@@ -16,7 +16,7 @@ class StoreSeeder extends Seeder
             'user_id' => 2,
             'name' => 'Ethereal Stasionary',
             'address' => 'Jl. Jakarta No.12, Malang, Jawa Timur',
-            'description' => 'Toko yang menyediakan berbagai macam stasionary.',
+            'description' => 'Tokstore no yang menyediakan berbagai macam stasionary.',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
