@@ -16,30 +16,30 @@ class AdminUserSeeder extends Seeder
     {
         // 1. Admin 
         User::firstOrCreate(
-            ['email' => 'zahra@gmail.com'],
+            ['email' => 'theodoraaulia@gmail.com'],
             [
-                'name' => 'Zahra',
-                'password' => Hash::make('zahra123'),
+                'name' => 'Theodora Aurelia',
+                'password' => Hash::make('aureliathe123'),
                 'role' => 'admin',
             ]
         );
 
         // 2. Member 1
         User::firstOrCreate(
-            ['email' => 'tia@gmail.com'],
+            ['email' => 'elenorakriya@gmail.com'],
             [
-                'name' => 'Tia',
-                'password' => Hash::make('tiaa456'),
+                'name' => 'Kriya Elenora',
+                'password' => Hash::make('elenoraa456'),
                 'role' => 'member',
             ]
         );
 
         // 3. Member 2
         User::firstOrCreate(
-            ['email' => 'nia@gmail.com'],
+            ['email' => 'tiaraputri@gmail.com'],
             [
-                'name' => 'Nia',
-                'password' => Hash::make('niaa789'),
+                'name' => 'Tiara Nadya Putri',
+                'password' => Hash::make('tiaranadya789'),
                 'role' => 'member',
             ]
         );
