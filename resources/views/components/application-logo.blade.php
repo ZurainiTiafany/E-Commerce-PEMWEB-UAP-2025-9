@@ -1,3 +1,5 @@
-<img src="{{ asset('assets/images/logo.png') }}" 
-     alt="Ethereal Stationery" 
-     class="w-28 mx-auto">
+<img 
+    src="{{ asset('assets/images/logo.png') }}" 
+    alt="Ethereal Stationery"
+    {{ $attributes->merge(['class' => 'mx-auto']) }}
+>

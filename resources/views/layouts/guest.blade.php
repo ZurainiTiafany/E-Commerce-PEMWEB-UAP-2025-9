@@ -18,9 +18,10 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
 
             <!-- Logo -->
-            <div>
-                <x-application-logo class="w-28 h-auto mx-auto" />
+            <div class="flex justify-center">
+                <x-application-logo class="w-48 h-auto" />
             </div>
+
 
             <!-- Card -->
             <div class="w-full sm:max-w-md mt-6 px-6 py-6 bg-white shadow-lg overflow-hidden sm:rounded-xl">
