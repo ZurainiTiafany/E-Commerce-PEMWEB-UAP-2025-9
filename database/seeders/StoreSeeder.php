@@ -23,7 +23,7 @@ class StoreSeeder extends Seeder
             ['user_id' => $owner->id], 
             [
                 'name' => 'Ethereal Stationary',
-                'logo' => 'assets/images/logo.png', 
+                'logo' => 'public/assets/images/logo.png', 
                 'about' => 'Menyediakan Berbagai Macam Alat Tulis dan Stationary',
                 'phone' => '081234567890',
                 'city' => 'Jakarta',
