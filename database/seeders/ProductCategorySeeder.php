@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\ProductCategory;
+use Illuminate\Support\Str;
 
 class ProductCategorySeeder extends Seeder
 {
@@ -14,19 +15,22 @@ class ProductCategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Pulpen', 'slug' => 'pulpen'],
-            ['name' => 'Buku', 'slug' => 'buku'],
-            ['name' => 'Pensil', 'slug' => 'pensil'],
-            ['name' => 'Highlighter', 'slug' => 'highlighter'],
-            ['name' => 'Washie Tape', 'slug' => 'washie-tape'],
+            'Pulpen', 
+            'Buku', 
+            'Pensil', 
+            'Highlighter', 
+            'Washie-tape'
         ];
 
-        foreach ($categories as $category) {
-            ProductCategory::firstOrCreate(
-                ['slug' => $category['slug']],  
-                ['name' => $category['name']]
+        foreach ($categories as $name) {
+            ProductCategory::updateOrCreate(
+                ['name' => $name],
+                [
+                    'slug' => Str::slug($name),
+                    'description' => "Kategori untuk $name"
+                ]
             );
         }
-    
     }
+    
 }

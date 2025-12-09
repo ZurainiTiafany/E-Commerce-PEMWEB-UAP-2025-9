@@ -14,35 +14,9 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Admin 
-        User::firstOrCreate(
-            ['email' => 'theodoraaulia@gmail.com'],
-            [
-                'name' => 'Theodora Aurelia',
-                'password' => Hash::make('aureliathe123'),
-                'role' => 'admin',
-            ]
-        );
-
-        // 2. Member 1
-        User::firstOrCreate(
-            ['email' => 'elenorakriya@gmail.com'],
-            [
-                'name' => 'Kriya Elenora',
-                'password' => Hash::make('elenoraa456'),
-                'role' => 'member',
-            ]
-        );
-
-        // 3. Member 2
-        User::firstOrCreate(
-            ['email' => 'tiaraputri@gmail.com'],
-            [
-                'name' => 'Tiara Nadya Putri',
-                'password' => Hash::make('tiaranadya789'),
-                'role' => 'member',
-            ]
-        );
+        // 1. Set user ID 1 sebagai admin
+        User::where('id', 1)->update([
+            'role' => 'admin'
+        ]);
     }
 }
-

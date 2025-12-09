@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\ProductCategory;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -15,7 +16,6 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $store = Store::first();
-
         $categories = ProductCategory::all();
 
         if (!$store || $categories->count() == 0) {
@@ -23,71 +23,103 @@ class ProductSeeder extends Seeder
         }
 
         $products = [
-            [   'name' => 'Pulpen Zebra Kokoro Gel Pen Color 0.5 mm', 
-                'slug' => 'Pulpen-Zebra-Kokoro-Gel-Pen-Color-0.5-mm', 
-                'price' => 60000, 
-                'category' => 'pulpen'
+            [   'name' => 'Pulpen Zebra Kokoro Gel Pen Colors 0.5 mm Isi 10 Pcs', 
+                'price' => 60000,
+                'stock' => 30,
+                'weight' => 100,
+                'description' => 'Pulpen gel premium dengan warna tinta cerah, cocok untuk mencatat, journaling, dan membuat highlight tipis. Nyaman digunakan karena tip 0.5 mm yang halus.',
+                'images' => ['zebra-kokoro-1.jpg', 'zebra-kokoro-2.jpg'],
+                'category' => 'Pulpen'
             ],
             [   'name' => 'Pulpen Zebra Sarasa Clip 0.5 Retractable Gel Ink', 
-                'slug' => 'Pulpen-Zebra-Sarasa-Clip-0.5-Retractable-Gel-Ink', 
                 'price' => 177000, 
-                'category' => 'pulpen'
+                'stock' => 43,
+                'weight' => 100,
+                'description' => 'Pulpen gel retractable dengan tinta pekat, cepat kering, dan nyaman digunakan untuk menulis lama. Clip kuat dan tidak mudah patah.',
+                'images' => ['zebra-sarasa-1.jpg'],
+                'category' => 'Pulpen'
             ],
             [   'name' => 'Buku Tulis Sidu 38 Lembar (1 Pack Isi 10 Pcs)', 
-                'slug' => 'Buku-Tulis-Sidu-38-Lembar-(-1-Pack-Isi-10-Pcs-)', 
                 'price' => 35000, 
-                'category' => 'buku'
+                'stock' => 45,
+                'weight' => 200,
+                'description' => 'Buku tulis SIDU yang terkenal awet dan nyaman dipakai. Kertas lebih tebal sehingga tidak tembus tinta. Cocok untuk sekolah maupun kuliah.',
+                'images' => ['sidu-38-lembar.jpg'],
+                'category' => 'Buku'
             ],
             [   'name' => 'Buku Catatan Notebook A5 Kerja Buku Jurnal', 
-                'slug' => 'Buku-Catatan-Notebook-A5-Kerja-Buku-Jurnal', 
                 'price' => 54000, 
-                'category' => 'buku'
+                'stock' => 50,
+                'weight' => 150,
+                'description' => 'Notebook ukuran A5 dengan desain minimalis. Kertas premium cocok untuk journaling, to-do list, dan catatan kerja.',
+                'images' => ['notebook-a5-1.jpg', 'notebook-a5-2.jpg'],
+                'category' => 'Buku'
             ],
             [   'name' => 'Faber-Castell Pencil Castell 9000-2B', 
-                'slug' => 'Faber-Castell-Pencil-Castell-9000-2B', 
                 'price' => 56000, 
-                'category' => 'pensil'
+                'stock' => 27,
+                'weight' => 100,
+                'description' => 'Pensil profesional dengan tingkat kekerasan 2B. Cocok untuk sketching, menggambar detail, dan shading.',
+                'images' => ['castell-9000.jpg'],
+                'category' => 'Pensil'
             ],
             [   'name' => 'Pensil 2B Staedtler', 
-                'slug' => 'Pensil 2B Staedtler', 
                 'price' => 47000, 
-                'category' => 'pensil'
+                'stock' => 39,
+                'weight' => 200,
+                'description' => 'Pensil Staedtler 2B yang lembut dan nyaman digunakan. Cocok untuk ujian, menggambar, dan coretan harian.',
+                'images' => ['staedtler-2b.jpg'],
+                'category' => 'Pensil'
             ],
             [   'name' => 'Joyko HI-69-6 Erasable Highlighter 1 Set Isi 6 Pcs Dual Tip', 
-                'slug' => 'Joyko-HI-69-6-Erasable-Highlighter-1-Set-Isi-6-Pcs-Dual-Tip', 
                 'price' => 90000, 
-                'category' => 'highlighter'
+                'stock' => 23,
+                'weight' => 60,
+                'description' => 'Highlighter dengan dua ujung (dual tip) dan dapat dihapus. Cocok untuk belajar, note warna-warni, dan journaling.',
+                'images' => ['joyko-hi-69-1.jpg', 'joyko-hi-69-2.jpg'],
+                'category' => 'Highlighter'
             ],
             [   'name' => 'Highlighter Kenko Ovaliner Pink', 
-                'slug' => 'Highlighter-Kenko-Ovaliner-Pink', 
-                'price' => 22000, 
-                'category' => 'highlighter'
+                'price' => 22000,
+                'stock' => 42, 
+                'weight' => 100,
+                'description' => 'Highlighter warna pink dengan bentuk oval yang ergonomis. Warna stabilo cerah tidak mudah luntur.',
+                'images' => ['kenko-ovaliner.jpg'],
+                'category' => 'Highlighter'
             ],
             [   'name' => 'Washie Tape Dekorasi Pastel Kartun Lucu', 
-                'slug' => 'Washie-Tape-Dekorasi-Pastel-Kartun-Lucu', 
                 'price' => 30000, 
-                'category' => 'washie-tape'
+                'stock' => 32,
+                'weight' => 50,
+                'description' => 'Washie tape bermotif kartun lucu dengan warna pastel. Cocok untuk dekorasi jurnal, kartu, dan scrapbook.',
+                'images' => ['washie-tape-pastel.jpg'],
+                'category' => 'Washie-tape'
             ],
             [   'name' => 'Washie Tape Spring Flower Romantic Series', 
-                'slug' => 'Washie-Tape-Spring-Flower-Romantic-Series', 
                 'price' => 36000, 
-                'category' => 'washie-tape'
+                'stock' => 60,
+                'weight' => 70,
+                'description' => 'Seri washi tape bertema bunga musim semi dengan warna lembut. Cocok untuk dekorasi atau bullet journal.',
+                'images' => ['washie-tape-flower.jpg'],
+                'category' => 'Washie-tape'
             ],
         ];
 
         foreach ($products as $p) {
 
-            $category = ProductCategory::where('slug', $p['category'])->first();
+            $category = ProductCategory::where('name', $p['category'])->first();
+            $slug = Str::slug($p['category']) . '-' . Str::slug($p['name']);
 
             Product::firstOrCreate(
-                ['slug' => $p['slug']],
+                ['name' => $p['name']],
                 [
                     'store_id' => $store->id,
                     'product_category_id' => $category->id,
-                    'name' => $p['name'],
                     'price' => $p['price'],
-                    'description' => 'Produk alat tulis berkualitas.',
-                    'stock' => 100,
+                    'stock' => $p['stock'],
+                    'weight' => $p['weight'] ?? 100,
+                    'description' => $p['description'],
+                    'slug' => $slug,
                 ]
             );
         }
