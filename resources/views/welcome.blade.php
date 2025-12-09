@@ -74,7 +74,125 @@
     transform: translateY(-2px);
 }
 
-    </style>
+
+.banner-img {
+    width: 100%;
+    height: 55vh;
+    object-fit: cover;
+}
+
+.banner-img {
+height: 480px;
+object-fit: cover;
+}
+
+.text-shadow-title {
+color: #A4133C;
+text-shadow: 0 3px 8px #FFFFFF;
+}
+
+.text-shadow-desc {
+color: #fff;
+text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+}
+
+.kategori-produk {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.kategori-produk h2 {
+    font-weight: 700;
+    color: #A4133C;
+    text-align: center;
+    margin-bottom: 25px; /* jarak biar gak mepet */
+    margin-top: 40px;    /* kasih jarak atas juga */
+}
+
+
+/* Container gambar kategori (1 baris) */
+.kategori-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap; /* biar tetap satu baris */
+}
+
+/* Item per kategori */
+.kategori-item {
+    text-align: center;
+}
+
+/* Gambar kategori */
+.kategori-item img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    border: 3px solid transparent; /* default border tidak terlihat */
+}
+
+/* Hover: border berubah warna (glow effect) */
+.kategori-item:hover img {
+    border-color: #A4133C;
+    box-shadow: 0 0 12px rgba(164, 19, 60, 0.4);
+    transform: scale(1.03);
+}
+
+/* Hilangkan tulisan / card ::after */
+.kategori-item::after {
+    content: none !important;
+}
+
+/* Nama kategori */
+.kategori-item p {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 400; 
+    color: #333;
+}
+
+/* Hilangkan underline link */
+.kategori-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-detail {
+    background-color: #A4133C !important;
+    color: white !important;
+    border: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-detail:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(164, 19, 60, 0.3);
+}
+
+.product-card .card-title {
+    min-height: 48px; /* atur tinggi minimum */
+    font-size: 14px;  /* kecilin tulisan */
+    line-height: 1.3;
+}
+
+.product-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card .card-text {
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+
+</style>
+
 </head>
 
 <body>
@@ -129,13 +247,13 @@
         <!-- SLIDE 1 -->
         <div class="carousel-item active">
             <img src="{{ asset('assets/images/banner 1.png') }}" 
-                 class="d-block w-100 banner-img">
+                 class="d-block banner-img">
         </div>
 
         <!-- SLIDE 2 -->
         <div class="carousel-item">
             <img src="{{ asset('assets/images/banner 2.png') }}" 
-                 class="d-block w-100 banner-img">
+                 class="d-block banner-img">
 
             <div class="carousel-caption d-none d-md-block text-start">
                 <h2 class="fw-bold text-shadow-title">Stationery Terlengkap</h2>
@@ -148,7 +266,7 @@
         <!-- SLIDE 3 -->
         <div class="carousel-item">
             <img src="{{ asset('assets/images/banner 3.png') }}" 
-                 class="d-block w-100 banner-img">
+                 class="d-block banner-img">
 
             <div class="carousel-caption d-none d-md-block text-start">
                 <h2 class="fw-bold text-shadow-title">Stationery Terlengkap</h2>
@@ -168,49 +286,55 @@
     </button>
 </div>
 
-<!-- CSS SUPAYA SAMA DI SEMUA DEVICE -->
-<style>
-    .banner-img {
-        height: 480px;
-        object-fit: cover;
-    }
-
-    .text-shadow-title {
-        color: #A4133C;
-        text-shadow: 0 3px 8px #FFFFFF;
-    }
-
-    .text-shadow-desc {
-        color: #fff;
-        text-shadow: 0 3px 8px rgba(0,0,0,0.7);
-    }
-</style>
-
 
 
 {{-- KATEGORI --}}
-<section class="container my-5">
-    <h3 class="fw-bold text-center mb-4" style="color: #A4133C;">Kategori Produk</h3>
-    <div class="row text-center">
+<!-- SECTION KATEGORI -->
+<section class="kategori-produk">
+    <h2>Kategori Produk</h2>
 
-        <div class="col-md-2">
-            <div class="category-card">Pena</div>
-        </div>
-        <div class="col-md-2">
-            <div class="category-card">Pensil</div>
-        </div>
-        <div class="col-md-2">
-            <div class="category-card">Buku</div>
-        </div>
-        <div class="col-md-2">
-            <div class="category-card">Highlighter</div>
-        </div>
-        <div class="col-md-2">
-            <div class="category-card">Washi Tape</div>
-        </div>
+    <div class="kategori-container">
+
+        <a href="/kategori/pena" class="kategori-link">
+            <div class="kategori-item">
+                <img src="{{ asset('assets/images/pena1.jpg') }}" alt="Pena">
+                <p>Pena</p>
+            </div>
+        </a>
+
+        <a href="/kategori/pensil" class="kategori-link">
+            <div class="kategori-item">
+                <img src="{{ asset('assets/images/pensil1.jpg') }}" alt="Pensil">
+                <p>Pensil</p>
+            </div>
+        </a>
+
+        <a href="/kategori/buku" class="kategori-link">
+            <div class="kategori-item">
+                <img src="{{ asset('assets/images/buku1.jpg') }}" alt="Buku">
+                <p>Buku</p>
+            </div>
+        </a>
+
+        <a href="/kategori/highlighter" class="kategori-link">
+            <div class="kategori-item">
+                <img src="{{ asset('assets/images/highlighter1.jpg') }}" alt="Highlighter">
+                <p>Highlighter</p>
+            </div>
+        </a>
+
+        <a href="/kategori/washitape" class="kategori-link">
+            <div class="kategori-item">
+                <img src="{{ asset('assets/images/washitape1.jpg') }}" alt="Washi Tape">
+                <p>Washi Tape</p>
+            </div>
+        </a>
 
     </div>
 </section>
+
+
+
 
 {{-- PRODUK DUMMY --}}
 <section class="container my-5">
@@ -218,52 +342,57 @@
 
     <div class="row g-4">
 
+        <!-- PRODUK 1 -->
         <div class="col-md-3">
             <div class="card product-card">
-                <img src="https://images.unsplash.com/photo-1588421357574-87938a86fa28" class="card-img-top">
+                <img src="{{ asset('assets/images/1/zebra-sarasa-1.jpg') }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Pena Gel Premium</h5>
-                    <p class="card-text">Rp 12.000</p>
-                    <a class="btn btn-primary w-100">Detail</a>
+                    <h5 class="card-title">Pulpen Zebra Sarasa Clip 0.5 Retractable Gel Ink</h5>
+                    <p class="card-text">Rp 177.000</p>
+                    <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
                 </div>
             </div>
         </div>
 
+        <!-- PRODUK 2 -->
         <div class="col-md-3">
             <div class="card product-card">
-                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" class="card-img-top">
+                <img src="{{ asset('assets/images/3/sidu-38-lembar.jpg') }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Buku Catatan A5</h5>
-                    <p class="card-text">Rp 18.000</p>
-                    <a class="btn btn-primary w-100">Detail</a>
+                    <h5 class="card-title">Buku Tulis Sidu 38 Lembar (1 Pack Isi 10 Pcs)</h5>
+                    <p class="card-text">Rp 35.000</p>
+                    <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
                 </div>
             </div>
         </div>
 
+        <!-- PRODUK 3 -->
         <div class="col-md-3">
             <div class="card product-card">
-                <img src="https://images.unsplash.com/photo-1616627451205-cb3d47ad1e9d" class="card-img-top">
+                <img src="{{ asset('assets/images/5/castell-9000.jpg') }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Highlighter Pastel</h5>
-                    <p class="card-text">Rp 15.000</p>
-                    <a class="btn btn-primary w-100">Detail</a>
+                    <h5 class="card-title">Faber-Castell Pencil Castell 9000-2B</h5>
+                    <p class="card-text">Rp 56.000</p>
+                    <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
                 </div>
             </div>
         </div>
 
+        <!-- PRODUK 4 -->
         <div class="col-md-3">
             <div class="card product-card">
-                <img src="https://images.unsplash.com/photo-1610395219791-cf1e16f7aa57" class="card-img-top">
+                <img src="{{ asset('assets/images/9/washie-tape-pastel.jpeg') }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Washi Tape Motif</h5>
-                    <p class="card-text">Rp 10.000</p>
-                    <a class="btn btn-primary w-100">Detail</a>
+                    <h5 class="card-title">Washie Tape Dekorasi Pastel Kartun Lucu</h5>
+                    <p class="card-text">Rp 30.000</p>
+                    <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
                 </div>
             </div>
         </div>
 
     </div>
 </section>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
