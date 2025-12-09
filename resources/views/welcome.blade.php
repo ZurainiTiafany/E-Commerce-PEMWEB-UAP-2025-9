@@ -128,82 +128,64 @@
 
         <!-- SLIDE 1 -->
         <div class="carousel-item active">
-            <img src="{{ asset('assets/images/banner 1.png') }}" class="d-block w-100" style="max-height: 480px; object-fit: cover;">
-            <div class="carousel-caption d-none d-md-block text-start"></div>
+            <img src="{{ asset('assets/images/banner 1.png') }}" 
+                 class="d-block w-100 banner-img">
         </div>
 
         <!-- SLIDE 2 -->
-<div class="carousel-item active">
+        <div class="carousel-item">
+            <img src="{{ asset('assets/images/banner 2.png') }}" 
+                 class="d-block w-100 banner-img">
 
-    <!-- GAMBAR SLIDER -->
-    <img src="{{ asset('assets/images/banner 2.png') }}" 
-         class="d-block w-100"
-         height="450"
-         style="object-fit: cover;">
-
-    <!-- TEKS SLIDER -->
-    <div class="carousel-caption d-none d-md-block text-start">
-
-        <h2 class="fw-bold" style="
-            color: #A4133C;
-            text-shadow: 0 3px 8px #FFFFFF;
-        ">
-            Stationery Terlengkap
-        </h2>
-
-        <p class="fw-semibold mt-2" style="
-            color: #fff;
-            text-shadow: 0 3px 8px rgba(0,0,0,0.7);
-        ">
-            Temukan alat tulis terbaik dengan harga terjangkau.
-        </p>
-
-    </div>
-
-</div>
-
+            <div class="carousel-caption d-none d-md-block text-start">
+                <h2 class="fw-bold text-shadow-title">Stationery Terlengkap</h2>
+                <p class="fw-semibold mt-2 text-shadow-desc">
+                    Temukan alat tulis terbaik dengan harga terjangkau.
+                </p>
+            </div>
+        </div>
 
         <!-- SLIDE 3 -->
-        <div class="carousel-item active">
+        <div class="carousel-item">
+            <img src="{{ asset('assets/images/banner 3.png') }}" 
+                 class="d-block w-100 banner-img">
 
-    <!-- GAMBAR SLIDER -->
-    <img src="{{ asset('assets/images/banner 3.png') }}" 
-         class="d-block w-100"
-         height="450"
-         style="object-fit: cover;">
-
-    <!-- TEKS SLIDER -->
-    <div class="carousel-caption d-none d-md-block text-start">
-
-        <h2 class="fw-bold" style="
-            color: #A4133C;
-            text-shadow: 0 3px 8px #FFFFFF;
-        ">
-            Stationery Terlengkap
-        </h2>
-
-        <p class="fw-semibold mt-2" style="
-            color: #fff;
-            text-shadow: 0 3px 8px rgba(0,0,0,0.7);
-        ">
-            Temukan alat tulis terbaik dengan harga terjangkau.
-        </p>
-
+            <div class="carousel-caption d-none d-md-block text-start">
+                <h2 class="fw-bold text-shadow-title">Stationery Terlengkap</h2>
+                <p class="fw-semibold mt-2 text-shadow-desc">
+                    Temukan alat tulis terbaik dengan harga terjangkau.
+                </p>
+            </div>
+        </div>
     </div>
 
-</div>
-
-    <!-- PANAH KIRI -->
+    <!-- PANAH -->
     <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(330deg);"></span>
+        <span class="carousel-control-prev-icon"></span>
     </button>
-
-    <!-- PANAH KANAN -->
     <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" style="filter: invert(20%) sepia(80%) saturate(500%) hue-rotate(330deg);"></span>
+        <span class="carousel-control-next-icon"></span>
     </button>
-
 </div>
+
+<!-- CSS SUPAYA SAMA DI SEMUA DEVICE -->
+<style>
+    .banner-img {
+        height: 480px;
+        object-fit: cover;
+    }
+
+    .text-shadow-title {
+        color: #A4133C;
+        text-shadow: 0 3px 8px #FFFFFF;
+    }
+
+    .text-shadow-desc {
+        color: #fff;
+        text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+    }
+</style>
+
 
 
 {{-- KATEGORI --}}
