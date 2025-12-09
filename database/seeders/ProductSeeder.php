@@ -28,7 +28,6 @@ class ProductSeeder extends Seeder
                 'stock' => 30,
                 'weight' => 100,
                 'description' => 'Pulpen gel premium dengan warna tinta cerah, cocok untuk mencatat, journaling, dan membuat highlight tipis. Nyaman digunakan karena tip 0.5 mm yang halus.',
-                'images' => ['zebra-kokoro-1.jpg'],
                 'category' => 'Pulpen'
             ],
             [   'name' => 'Pulpen Zebra Sarasa Clip 0.5 Retractable Gel Ink', 
@@ -36,7 +35,6 @@ class ProductSeeder extends Seeder
                 'stock' => 43,
                 'weight' => 100,
                 'description' => 'Pulpen gel retractable dengan tinta pekat, cepat kering, dan nyaman digunakan untuk menulis lama. Clip kuat dan tidak mudah patah.',
-                'images' => ['zebra-sarasa-1.jpg'],
                 'category' => 'Pulpen'
             ],
             [   'name' => 'Buku Tulis Sidu 38 Lembar (1 Pack Isi 10 Pcs)', 
@@ -44,7 +42,6 @@ class ProductSeeder extends Seeder
                 'stock' => 45,
                 'weight' => 200,
                 'description' => 'Buku tulis SIDU yang terkenal awet dan nyaman dipakai. Kertas lebih tebal sehingga tidak tembus tinta. Cocok untuk sekolah maupun kuliah.',
-                'images' => ['sidu-38-lembar.jpg'],
                 'category' => 'Buku'
             ],
             [   'name' => 'Buku Catatan Notebook A5 Kerja Buku Jurnal', 
@@ -52,7 +49,6 @@ class ProductSeeder extends Seeder
                 'stock' => 50,
                 'weight' => 150,
                 'description' => 'Notebook ukuran A5 dengan desain minimalis. Kertas premium cocok untuk journaling, to-do list, dan catatan kerja.',
-                'images' => ['notebook-a5-1.jpg'],
                 'category' => 'Buku'
             ],
             [   'name' => 'Faber-Castell Pencil Castell 9000-2B', 
@@ -60,7 +56,6 @@ class ProductSeeder extends Seeder
                 'stock' => 27,
                 'weight' => 100,
                 'description' => 'Pensil profesional dengan tingkat kekerasan 2B. Cocok untuk sketching, menggambar detail, dan shading.',
-                'images' => ['castell-9000.jpg'],
                 'category' => 'Pensil'
             ],
             [   'name' => 'Pensil 2B Staedtler', 
@@ -68,7 +63,6 @@ class ProductSeeder extends Seeder
                 'stock' => 39,
                 'weight' => 200,
                 'description' => 'Pensil Staedtler 2B yang lembut dan nyaman digunakan. Cocok untuk ujian, menggambar, dan coretan harian.',
-                'images' => ['staedtler-2b.jpg'],
                 'category' => 'Pensil'
             ],
             [   'name' => 'Joyko HI-69-6 Erasable Highlighter 1 Set Isi 6 Pcs Dual Tip', 
@@ -76,7 +70,6 @@ class ProductSeeder extends Seeder
                 'stock' => 23,
                 'weight' => 60,
                 'description' => 'Highlighter dengan dua ujung (dual tip) dan dapat dihapus. Cocok untuk belajar, note warna-warni, dan journaling.',
-                'images' => ['joyko-hi-69-1.jpg'],
                 'category' => 'Highlighter'
             ],
             [   'name' => 'Highlighter Kenko Ovaliner Pink', 
@@ -84,7 +77,6 @@ class ProductSeeder extends Seeder
                 'stock' => 42, 
                 'weight' => 100,
                 'description' => 'Highlighter warna pink dengan bentuk oval yang ergonomis. Warna stabilo cerah tidak mudah luntur.',
-                'images' => ['kenko-ovaliner.jpg'],
                 'category' => 'Highlighter'
             ],
             [   'name' => 'Washie Tape Dekorasi Pastel Kartun Lucu', 
@@ -92,7 +84,6 @@ class ProductSeeder extends Seeder
                 'stock' => 32,
                 'weight' => 50,
                 'description' => 'Washie tape bermotif kartun lucu dengan warna pastel. Cocok untuk dekorasi jurnal, kartu, dan scrapbook.',
-                'images' => ['washie-tape-pastel.jpg'],
                 'category' => 'Washie-tape'
             ],
             [   'name' => 'Washie Tape Spring Flower Romantic Series', 
@@ -100,7 +91,6 @@ class ProductSeeder extends Seeder
                 'stock' => 60,
                 'weight' => 70,
                 'description' => 'Seri washi tape bertema bunga musim semi dengan warna lembut. Cocok untuk dekorasi atau bullet journal.',
-                'images' => ['washie-tape-flower.jpg'],
                 'category' => 'Washie-tape'
             ],
         ];

@@ -12,31 +12,47 @@ class ProductImageSeeder extends Seeder
      */
     public function run(): void
     {
-        $products = Product::all();
-    
-            foreach ($products as $product) {
-    
-                // Gambar pulpen sarasa 1
+        $images = [
+            1 => [
+                ['file' => 'zebra-sarasa-1.jpg', 'thumbnail' => true],
+            ],
+            2 => [
+                ['file' => 'zebra-kokoro-1.jpeg', 'thumbnail' => true],
+            ],
+            3 => [
+                ['file' => 'sidu-38-lembar.jpg', 'thumbnail' => true],
+            ],
+            4 => [
+                ['file' => 'notebook-a5-1.jpeg', 'thumbnail' => true],
+            ],
+            5 => [
+                ['file' => 'castell-9000.jpg', 'thumbnail' => true],
+            ],
+            6 => [
+                ['file' => 'staedtler-2b.jpg', 'thumbnail' => true],
+            ],
+            7 => [
+                ['file' => 'joyko-hi-69-1.jpeg', 'thumbnail' => true],
+            ],
+            8 => [
+                ['file' => 'kenko-baliner.jpeg', 'thumbnail' => true],
+            ],
+            9 => [
+                ['file' => 'washie-tape-pastel.jpeg', 'thumbnail' => true],
+            ],
+            10 => [
+                ['file' => 'washie-tape-flower.jpg', 'thumbnail' => true],
+            ],
+        ];
+
+        foreach ($images as $productId => $imageList) {
+            foreach ($imageList as $img) {
                 ProductImage::create([
-                    'product_id'  => $product->id,
-                    'image'       => 'products/' . $product->slug . 'public/assets/images/zebra-sarasa-1.jpg',
-                    'is_thumbnail'=> true,
+                    'product_id'   => $productId,
+                    'image'        => 'Product/' . $productId . '/' . $img['file'],
+                    'is_thumbnail' => $img['thumbnail'],
                 ]);
-    
-                // Gambar pulpen serasa 2
-                ProductImage::create([
-                    'product_id'  => $product->id,
-                    'image'       => 'products/' . $product->slug . '',
-                    'is_thumbnail'=> false,
-                ]);
-    
-                // Gambar tambahan 3
-                ProductImage::create([
-                    'product_id'  => $product->id,
-                    'image'       => 'products/' . $product->slug . '-3.jpg',
-                    'is_thumbnail'=> false,
-            ]);
+            }
         }
-        
     }
 }
