@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'stock' => 30,
                 'weight' => 100,
                 'description' => 'Pulpen gel premium dengan warna tinta cerah, cocok untuk mencatat, journaling, dan membuat highlight tipis. Nyaman digunakan karena tip 0.5 mm yang halus.',
-                'images' => ['zebra-kokoro-1.jpg', 'zebra-kokoro-2.jpg'],
+                'images' => ['zebra-kokoro-1.jpg'],
                 'category' => 'Pulpen'
             ],
             [   'name' => 'Pulpen Zebra Sarasa Clip 0.5 Retractable Gel Ink', 
@@ -52,7 +52,7 @@ class ProductSeeder extends Seeder
                 'stock' => 50,
                 'weight' => 150,
                 'description' => 'Notebook ukuran A5 dengan desain minimalis. Kertas premium cocok untuk journaling, to-do list, dan catatan kerja.',
-                'images' => ['notebook-a5-1.jpg', 'notebook-a5-2.jpg'],
+                'images' => ['notebook-a5-1.jpg'],
                 'category' => 'Buku'
             ],
             [   'name' => 'Faber-Castell Pencil Castell 9000-2B', 
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
                 'stock' => 23,
                 'weight' => 60,
                 'description' => 'Highlighter dengan dua ujung (dual tip) dan dapat dihapus. Cocok untuk belajar, note warna-warni, dan journaling.',
-                'images' => ['joyko-hi-69-1.jpg', 'joyko-hi-69-2.jpg'],
+                'images' => ['joyko-hi-69-1.jpg'],
                 'category' => 'Highlighter'
             ],
             [   'name' => 'Highlighter Kenko Ovaliner Pink', 
