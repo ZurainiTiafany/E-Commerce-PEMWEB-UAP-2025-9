@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Ethereal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+    .fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+#bannerCarousel {
+    margin-top: 90px; /* sesuaikan tinggi navbar kamu */
+}
         body {
             background-color: #FFFFFF;
             font-family: 'Poppins', sans-serif;
         }
+
         .navbar {
             background-color: #FFFFFF;
         }
+
         .navbar-brand, .nav-link {
             color: #A4133C !important;
             font-weight: 600;
@@ -54,23 +69,31 @@
 .btn-login {
     background: #A4133C;
     color: white;
-    border: 2px solid #A4133C;
+    border: 1px solid #A4133C;
+    transition: 0.2s ease;
+    font-weight: 400;
 }
+
 .btn-login:hover {
-    background: #A4133C;
-    color: white;
+    background: #8f0f32;
+    border-color: #8f0f32;
+    color: #fff;
     transform: translateY(-2px);
 }
 
+
 /* LOGIN = outline */
 .btn-register {
-    background: #A4133C;
-    color: white;
+    background: #FFFFFF;
+    color: #A4133C;
     border: 2px solid #A4133C;
+    transition: 0.2s ease;
+    font-weight: 400;
 }
+
 .btn-register:hover {
     background: #A4133C;
-    color: white;
+    color: #FFFFFF;
     transform: translateY(-2px);
 }
 
@@ -82,8 +105,8 @@
 }
 
 .banner-img {
-height: 480px;
-object-fit: cover;
+    width: 100%;
+    height: auto;
 }
 
 .text-shadow-title {
@@ -105,8 +128,8 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     font-weight: 700;
     color: #A4133C;
     text-align: center;
-    margin-bottom: 25px; /* jarak biar gak mepet */
-    margin-top: 40px;    /* kasih jarak atas juga */
+    margin-bottom: 25px; 
+    margin-top: 40px;    
 }
 
 
@@ -165,10 +188,12 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     color: white !important;
     border: none;
     font-weight: 600;
+    border-radius: 14px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-detail:hover {
+
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(164, 19, 60, 0.3);
 }
@@ -189,6 +214,55 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     font-size: 14px;
     margin-bottom: 12px;
 }
+.product-category {
+    font-size: 14px;
+    font-weight: 500;
+    color: #A4133C;
+    margin-bottom: 5px;
+    display: block;
+}
+.product-price {
+    font-size: 15px;
+    font-weight: 700; /* lebih bold */
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.footer-ethereal {
+    background-color: #FFF0F3;
+    padding: 40px 0;
+    border-top: 2px solid #f5d7dd;
+    margin-top: 60px;
+}
+
+.footer-text {
+    color: #A4133C;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.footer-links {
+    margin: 18px 0;
+}
+
+.footer-link {
+    margin: 0 12px;
+    color: #A4133C;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #8f0f32;
+}
+
+.footer-copy {
+    color: #8f8f8f;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
 
 
 </style>
@@ -198,7 +272,7 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 <body>
 
 {{-- NAVBAR --}}
-<nav class="navbar navbar-expand-lg shadow-sm px-4">
+<nav class="navbar navbar-expand-lg shadow-sm px-4 fixed-nav">
     <div class="container-fluid">
 
         <!-- Logo kiri -->
@@ -347,8 +421,10 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             <div class="card product-card">
                 <img src="{{ asset('assets/images/1/zebra-sarasa-1.jpg') }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">Pulpen Zebra Sarasa Clip 0.5 Retractable Gel Ink</h5>
-                    <p class="card-text">Rp 177.000</p>
+                    
+                <span class="product-category"> Kategori Pena</span>
+                <h5 class="card-title">Pulpen Zebra Sarasa Clip 0.5 Retractable Gel Ink</h5>
+                <p class="card-text">Rp 177.000</p>
                     <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
                 </div>
             </div>
@@ -359,6 +435,7 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             <div class="card product-card">
                 <img src="{{ asset('assets/images/3/sidu-38-lembar.jpg') }}" class="card-img-top">
                 <div class="card-body">
+                <span class="product-category"> Kategori Buku</span>
                     <h5 class="card-title">Buku Tulis Sidu 38 Lembar (1 Pack Isi 10 Pcs)</h5>
                     <p class="card-text">Rp 35.000</p>
                     <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
@@ -371,6 +448,7 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             <div class="card product-card">
                 <img src="{{ asset('assets/images/5/castell-9000.jpg') }}" class="card-img-top">
                 <div class="card-body">
+                <span class="product-category"> Kategori Pensil</span>
                     <h5 class="card-title">Faber-Castell Pencil Castell 9000-2B</h5>
                     <p class="card-text">Rp 56.000</p>
                     <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
@@ -383,6 +461,7 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             <div class="card product-card">
                 <img src="{{ asset('assets/images/9/washie-tape-pastel.jpeg') }}" class="card-img-top">
                 <div class="card-body">
+                <span class="product-category"> Kategori Washie Tape</span>
                     <h5 class="card-title">Washie Tape Dekorasi Pastel Kartun Lucu</h5>
                     <p class="card-text">Rp 30.000</p>
                     <a href="{{ route('login') }}" class="btn btn-detail w-100">Detail</a>
@@ -391,7 +470,30 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
         </div>
 
     </div>
-</section>
+    </section>
+    <!-- FOOTER -->
+<footer class="footer-ethereal mt-5">
+    <div class="container text-center">
+
+        <img src="{{ asset('assets/images/logo.png') }}" 
+             alt="Ethereal Logo" 
+             style="width: 80px; margin-bottom: 10px;">
+
+        <p class="footer-text">
+            Ethereal Stationery — Temukan alat tulis terbaik untuk kebutuhanmu.
+        </p>
+
+        <div class="footer-links">
+            <a href="/" class="footer-link">Home</a>
+            <a href="#" class="footer-link">Kategori</a>
+            <a href="#" class="footer-link">Store</a>
+            <a href="#" class="footer-link">Tentang Kami</a>
+        </div>
+
+        <p class="footer-copy">© 2025 Ethereal Stationery. All rights reserved.</p>
+    </div>
+</footer>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

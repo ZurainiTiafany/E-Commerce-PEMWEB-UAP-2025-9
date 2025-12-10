@@ -41,7 +41,7 @@ class ProductImageSeeder extends Seeder
                 ['file' => 'washie-tape-pastel.jpeg', 'thumbnail' => true],
             ],
             10 => [
-                ['file' => 'washie-tape-flower.jpg', 'thumbnail' => true],
+                ['file' => 'washie-tape-flower.', 'thumbnail' => true],
             ],
         ];
 
@@ -49,7 +49,7 @@ class ProductImageSeeder extends Seeder
             foreach ($imageList as $img) {
                 ProductImage::create([
                     'product_id'   => $productId,
-                    'image'        => 'Product/' . $productId . '/' . $img['file'],
+                    'image'        => 'assets/images/' . $productId . '/' . $img['file'],
                     'is_thumbnail' => $img['thumbnail'],
                 ]);
             }
