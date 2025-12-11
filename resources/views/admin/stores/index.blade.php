@@ -1,36 +1,60 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
+
+@section('title', 'Store Management')
+
 
 @section('content')
-<div class="py-6">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Daftar Store</h4>
+        <a href="{{ route('admin.stores.create') }}" class="btn btn-primary btn-sm">
+            + Tambah Store
+        </a>
+    </div>
 
-        <h1 class="text-2xl font-semibold mb-4">Manajemen Toko</h1>
+    <div class="card-body">
+        @if ($stores->count() === 0)
+            <div class="alert alert-warning text-center">
+                Belum ada store.
+            </div>
+        @else
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th style="width: 50px;">#</th>
+                    <th>Nama Store</th>
+                    <th>Alamat</th>
+                    <th>Keterangan</th>
+                    <th style="width: 150px;">Aksi</th>
+                </tr>
+            </thead>
 
-        <div class="bg-white p-6 shadow-sm rounded-lg">
+            <tbody>
+                @foreach ($stores as $store)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $store->name }}</td>
+                    <td>{{ $store->address }}</td>
+                    <td>{{ $store->description }}</td>
+                    <td>
+                        <a href="{{ route('admin.stores.edit', $store->id) }}" class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
 
-            <table class="w-full border">
-                <thead>
-                    <tr class="bg-gray-100">
-                        <th class="p-2 border">Nama Toko</th>
-                        <th class="p-2 border">Pemilik</th>
-                        <th class="p-2 border">Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($stores as $store)
-                        <tr>
-                            <td class="p-2 border">{{ $store->name }}</td>
-                            <td class="p-2 border">{{ $store->user->name }}</td>
-                            <td class="p-2 border">{{ $store->status }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-
-            </table>
-
-        </div>
-
+                        <form action="{{ route('admin.stores.destroy', $store->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Yakin menghapus store ini?');"
+                                    class="btn btn-danger btn-sm">
+                                Hapus
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @endif
     </div>
 </div>
 @endsection

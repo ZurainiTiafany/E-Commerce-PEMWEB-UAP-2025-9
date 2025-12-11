@@ -16,9 +16,12 @@ class UserManagementController extends Controller
     }
 
     public function delete($id)
-    {
-        User::findOrFail($id)->delete();
-
-        return back()->with('success', 'User berhasil dihapus.');
+{
+    if (auth()->id() == $id) {
+        return back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
     }
+
+    User::findOrFail($id)->delete();
+    return back()->with('success', 'User berhasil dihapus.');
+}
 }

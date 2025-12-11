@@ -3,22 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Store;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
-    }
+        // Hitung jumlah user
+        $totalUsers = User::count();
 
-    public function verification()
-    {
-        return view('admin.verification');
-    }
+        // Hitung jumlah store
+        $totalStores = Store::count();
 
-    public function users()
-    {
-        return view('admin.users');
-    }
+        // Hitung store dengan is_verified = false
+        $pendingStores = Store::where('is_verified', false)->count();
+
+        return view('admin.dashboard', compact(
+            'totalUsers',
+            'totalStores',
+            'pendingStores'
+        ));
+}
 }
