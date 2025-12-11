@@ -17,13 +17,10 @@ class StoreVerificationController extends Controller
 
     public function approve($id)
     {
-        $store = Store::findOrFail($id);
-        $store->update([
-            'is_verified' => true,
-            'verification_note' => 'Toko telah diverifikasi oleh admin.'
-        ]);
+    $store = Store::findOrFail($id);
+    $store->update(['is_verified' => true]);
 
-        return redirect()->back()->with('success', 'Toko berhasil diverifikasi!');
+    return back()->with('success', 'Toko berhasil diverifikasi!');
     }
 
     public function reject(Request $request, $id)
@@ -31,7 +28,6 @@ class StoreVerificationController extends Controller
         $store = Store::findOrFail($id);
         $store->update([
             'is_verified' => false,
-            'verification_note' => $request->reason
         ]);
 
         return redirect()->back()->with('error', 'Toko ditolak!');

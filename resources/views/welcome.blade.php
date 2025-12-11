@@ -483,12 +483,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             Ethereal Stationery — Temukan alat tulis terbaik untuk kebutuhanmu.
         </p>
 
-        <div class="footer-links">
-            <a href="/" class="footer-link">Home</a>
-            <a href="#" class="footer-link">Kategori</a>
-            <a href="#" class="footer-link">Store</a>
-            <a href="#" class="footer-link">Tentang Kami</a>
-        </div>
 
         <p class="footer-copy">© 2025 Ethereal Stationery. All rights reserved.</p>
     </div>
