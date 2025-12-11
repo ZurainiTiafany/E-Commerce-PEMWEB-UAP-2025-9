@@ -10,9 +10,22 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\StoreManagementController;
 use App\Http\Controllers\Admin\StoreVerificationController;
 
+
 // Middleware
 use App\Http\Middleware\AdminOnly;
 
+//Seller Controller
+use App\Http\Controllers\Seller\SellerDashboardController;
+use App\Http\Controllers\Seller\StoreRegistrationController;
+use App\Http\Controllers\Seller\SellerProfileController;
+use App\Http\Controllers\Seller\SellerCategoryController;
+use App\Http\Controllers\Seller\SellerProductController;
+use App\Http\Controllers\Seller\SellerOrderController;
+use App\Http\Controllers\Seller\SellerBalanceController;
+use App\Http\Controllers\Seller\SellerWithdrawalController;
+
+//Middleware
+use App\Http\Middleware\SellerOnly;
 // =====================
 // Home
 // =====================
@@ -73,6 +86,38 @@ Route::middleware(['auth', AdminOnly::class])
     Route::post('/verification/approve/{id}', [StoreVerificationController::class, 'approve'])->name('verification.approve');
     Route::post('/verification/reject/{id}', [StoreVerificationController::class, 'reject'])->name('verification.reject');
 });
+
+//seller
+Route::middleware(['auth', 'seller'])
+    ->prefix('seller')
+    ->name('seller.')
+    ->group(function () {
+
+        // Dashboard
+        Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
+
+        // Profile toko
+        Route::get('/profile', [SellerProfileController::class, 'index'])->name('profile');
+        Route::put('/profile', [SellerProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [SellerProfileController::class, 'delete'])->name('profile.delete');
+
+        // Categories
+        Route::resource('categories', SellerCategoryController::class);
+
+        // Products
+        Route::resource('products', SellerProductController::class);
+
+        // Orders
+        Route::get('/orders', [SellerOrderController::class, 'index'])->name('orders');
+        Route::put('/orders/{id}/status', [SellerOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+        // Balance
+        Route::get('/balance', [SellerBalanceController::class, 'index'])->name('balance');
+
+        // Withdrawals
+        Route::get('/withdrawals', [SellerWithdrawalController::class, 'index'])->name('withdrawals');
+        Route::post('/withdrawals', [SellerWithdrawalController::class, 'store'])->name('withdrawals.store');
+    });
 
 // =====================
 // Aktifkan Breeze
