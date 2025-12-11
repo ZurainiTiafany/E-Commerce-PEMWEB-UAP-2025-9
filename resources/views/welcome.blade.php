@@ -245,25 +245,12 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     margin: 18px 0;
 }
 
-.footer-link {
-    margin: 0 12px;
-    color: #A4133C;
-    font-weight: 500;
-    text-decoration: none;
-    transition: 0.2s ease;
-}
-
-.footer-link:hover {
-    color: #8f0f32;
-}
 
 .footer-copy {
     color: #8f8f8f;
     font-size: 13px;
     margin-top: 10px;
 }
-
-
 
 </style>
 
@@ -482,13 +469,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
         <p class="footer-text">
             Ethereal Stationery — Temukan alat tulis terbaik untuk kebutuhanmu.
         </p>
-
-        <div class="footer-links">
-            <a href="/" class="footer-link">Home</a>
-            <a href="#" class="footer-link">Kategori</a>
-            <a href="#" class="footer-link">Store</a>
-            <a href="#" class="footer-link">Tentang Kami</a>
-        </div>
 
         <p class="footer-copy">© 2025 Ethereal Stationery. All rights reserved.</p>
     </div>
