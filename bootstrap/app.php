@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // REGISTER ALIAS MIDDLEWARE DI SINI
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminOnly::class,
-            'seller' => \App\Http\Middleware\SellerOnly::class,
+            'member' => \App\Http\Middleware\MemberOnly::class,
         ]);
     
     })

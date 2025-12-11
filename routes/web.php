@@ -10,22 +10,24 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\StoreManagementController;
 use App\Http\Controllers\Admin\StoreVerificationController;
 
+//Member Controller
+use App\Http\Controllers\Member\MemberDashboardController;
+use App\Http\Controllers\Member\StoreRegistrationController;
+use App\Http\Controllers\Member\ProductController;
+use App\Http\Controllers\Member\CheckoutController;
+use App\Http\Controllers\Member\PaymentController;
+use App\Http\Controllers\Member\WalletController;
+use App\Http\Controllers\Member\TransactionHistoryController;
+
 
 // Middleware
 use App\Http\Middleware\AdminOnly;
 
-//Seller Controller
-use App\Http\Controllers\Seller\SellerDashboardController;
-use App\Http\Controllers\Seller\StoreRegistrationController;
-use App\Http\Controllers\Seller\SellerProfileController;
-use App\Http\Controllers\Seller\SellerCategoryController;
-use App\Http\Controllers\Seller\SellerProductController;
-use App\Http\Controllers\Seller\SellerOrderController;
-use App\Http\Controllers\Seller\SellerBalanceController;
-use App\Http\Controllers\Seller\SellerWithdrawalController;
 
-//Middleware
-use App\Http\Middleware\SellerOnly;
+
+// LOGIN UMUM (USER BIASA)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 // =====================
 // Home
 // =====================
@@ -40,21 +42,9 @@ Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('adm
 Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.process');
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-// =====================
-// Dashboard User (Breeze default)
-// =====================
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-// =====================
-// Profile (Breeze default)
-// =====================
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
+
 
 // =====================
 // ADMIN ROUTES
@@ -87,38 +77,47 @@ Route::middleware(['auth', AdminOnly::class])
     Route::post('/verification/reject/{id}', [StoreVerificationController::class, 'reject'])->name('verification.reject');
 });
 
-//seller
-Route::middleware(['auth', 'seller'])
-    ->prefix('seller')
-    ->name('seller.')
+// =====================
+// MEMBER ROUTES
+// =====================
+Route::middleware(['auth', 'member'])
+    ->prefix('member')
+    ->name('member.')
     ->group(function () {
 
-        // Dashboard
-        Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
+    // Dashboard member
+    Route::get('/dashboard', [MemberDashboardController::class, 'index'])->name('dashboard');
 
-        // Profile toko
-        Route::get('/profile', [SellerProfileController::class, 'index'])->name('profile');
-        Route::put('/profile', [SellerProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [SellerProfileController::class, 'delete'])->name('profile.delete');
+    // Registrasi Store (Seller)
+    Route::get('/store/register', [StoreRegistrationController::class, 'create'])->name('store.register');
+    Route::post('/store/register', [StoreRegistrationController::class, 'store'])->name('store.store');
 
-        // Categories
-        Route::resource('categories', SellerCategoryController::class);
+    // ==============================
+    // PRODUCT (List & Detail)
+    // ==============================
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
-        // Products
-        Route::resource('products', SellerProductController::class);
+    // ==============================
+    // CHECKOUT
+    // ==============================
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-        // Orders
-        Route::get('/orders', [SellerOrderController::class, 'index'])->name('orders');
-        Route::put('/orders/{id}/status', [SellerOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+    // ==============================
+    // PAYMENT
+    // ==============================
+    Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 
-        // Balance
-        Route::get('/balance', [SellerBalanceController::class, 'index'])->name('balance');
+    // ==============================
+    // WALLET
+    // ==============================
+    Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
 
-        // Withdrawals
-        Route::get('/withdrawals', [SellerWithdrawalController::class, 'index'])->name('withdrawals');
-        Route::post('/withdrawals', [SellerWithdrawalController::class, 'store'])->name('withdrawals.store');
-    });
-
+    // ==============================
+    // TRANSACTION HISTORY
+    // ==============================
+    Route::get('/transactions', [TransactionHistoryController::class, 'index'])->name('transactions.index');
+});
 // =====================
 // Aktifkan Breeze
 // =====================

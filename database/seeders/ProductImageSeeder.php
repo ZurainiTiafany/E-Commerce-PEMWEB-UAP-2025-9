@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\ProductImage;
 
 class ProductImageSeeder extends Seeder
 {
@@ -35,13 +36,13 @@ class ProductImageSeeder extends Seeder
                 ['file' => 'joyko-hi-69-1.jpeg', 'thumbnail' => true],
             ],
             8 => [
-                ['file' => 'kenko-baliner.jpeg', 'thumbnail' => true],
+                ['file' => 'kenko-ovaliner.jpeg', 'thumbnail' => true],
             ],
             9 => [
                 ['file' => 'washie-tape-pastel.jpeg', 'thumbnail' => true],
             ],
             10 => [
-                ['file' => 'washie-tape-flower.', 'thumbnail' => true],
+                ['file' => 'washie-tape-flower.jpg', 'thumbnail' => true],
             ],
         ];
 
