@@ -95,7 +95,7 @@
     border: 2px solid #A4133C;
     border-radius: 16px;
     overflow: hidden;
-    height: 400px; /* ❤️ Seragam semua card */
+    height: 420px; 
     display: flex;
     flex-direction: column;
 }
@@ -193,11 +193,9 @@
 
     <div class="kategori-container">
         @foreach($categories as $cat)
-        <a href="/member/products?category={{ $cat->id }}" class="text-decoration-none text-dark">
             <div class="kategori-item">
                 {{ $cat->name }}
             </div>
-        </a>
         @endforeach
     </div>
 </section>
@@ -231,9 +229,9 @@
                         Rp {{ number_format($p->price, 0, ',', '.') }}
                     </p>
 
-                    <a href="/member/products/{{ $p->id }}" class="btn btn-detail w-100">
-                        Detail
-                    </a>
+                    <a href="{{ route('member.products.show', $p->id) }}" class="detail-btn">
+    Detail
+</a>
                 </div>
             </div>
         </div>

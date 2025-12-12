@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ShippingTypeSeeder::class,
             ProductSeeder::class,
             WalletSeeder::class,
+            ProductImageSeeder::class,
 
             
         ]);

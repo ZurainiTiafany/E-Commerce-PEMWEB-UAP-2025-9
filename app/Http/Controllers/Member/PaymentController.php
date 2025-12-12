@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Member;
 
+use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\UserBalance;
 use App\Models\StoreBalance;
@@ -9,60 +10,99 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    // Halaman form
     public function index()
     {
-        return view('payment.index');
+        return view('member.payment.index'); // optional: page input VA
     }
 
-    // Cek kode VA yang dimasukkan user
+    // tampilkan halaman VA untuk transaksi
+    public function show($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        return view('member.payment.pay', compact('transaction'));
+    }
+
+    // proses simulasi bayar dari halaman pay (route POST member.payment.process)
+    public function confirmPayment(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+
+        // jika sudah paid, redirect
+        if ($transaction->payment_status === 'paid') {
+            return redirect()->route('member.transactions.index')->with('info', 'Transaksi sudah dibayar.');
+        }
+
+        // set paid
+        $transaction->update(['payment_status' => 'paid']);
+
+        // masukkan ke store balance
+        StoreBalance::addToStore($transaction->store_id, $transaction->grand_total);
+
+        return redirect()->route('member.transactions.index')->with('success', 'Pembayaran berhasil!');
+    }
+
+    // checkVA digunakan untuk halaman payment hub (cek VA) — optional
     public function checkVA(Request $request)
     {
-        // cek VA untuk topup
         $topup = UserBalance::where('va_number', $request->va)->first();
-
         if ($topup) {
-            return view('payment.confirm', [
-                'type' => 'topup',
-                'data' => $topup
-            ]);
+            return view('member.payment.confirm', ['type'=>'topup','data'=>$topup]);
         }
 
-        // cek VA untuk transaksi
         $trx = Transaction::where('va_number', $request->va)->first();
         if ($trx) {
-            return view('payment.confirm', [
-                'type' => 'purchase',
-                'data' => $trx
-            ]);
+            return view('member.payment.confirm', ['type'=>'purchase','data'=>$trx]);
         }
 
-        return back()->with('error', 'Kode VA tidak ditemukan');
+        return back()->with('error','Kode VA tidak ditemukan');
+    }
+    public function confirmVA($type, $id)
+{
+    // =========================
+    // PEMBAYARAN TOPUP SALDO
+    // =========================
+    if ($type === 'topup') {
+
+        $topup = UserBalance::findOrFail($id);
+
+        if ($topup->status === 'paid') {
+            return back()->with('error', 'Topup sudah diproses.');
+        }
+
+        // ubah status jadi paid
+        $topup->update(['status' => 'paid']);
+
+        // tambahkan ke saldo user
+        $user = $topup->user;
+        $user->balance->update([
+            'balance' => $user->balance->balance + $topup->amount
+        ]);
+
+        return redirect()->route('member.payment.index')
+            ->with('success', 'Topup berhasil! Saldo bertambah.');
     }
 
-    // Konfirmasi pembayaran
-    public function confirmPayment(Request $request)
-    {
-        if ($request->type === 'topup') {
-            $balance = UserBalance::find($request->id);
+    // =========================
+    // PEMBAYARAN TRANSAKSI PRODUK
+    // =========================
+    if ($type === 'purchase') {
 
-            $balance->update(['status' => 'success']);
+        $trx = Transaction::findOrFail($id);
 
-            // Tambah saldo ke user
-            $balance->user->increment('balance', $balance->amount);
-
-            return redirect('/wallet')->with('success', 'Topup berhasil!');
+        if ($trx->payment_status === 'paid') {
+            return back()->with('error', 'Transaksi sudah dibayar.');
         }
 
-        if ($request->type === 'purchase') {
-            $trx = Transaction::find($request->id);
+        // ubah status jadi paid
+        $trx->update(['payment_status' => 'paid']);
 
-            $trx->update(['payment_status' => 'paid']);
+        // tambah ke store balance
+        StoreBalance::addToStore($trx->store_id, $trx->grand_total);
 
-            // Tambah saldo ke store
-            StoreBalance::addToStore($trx->store_id, $trx->grand_total);
-
-            return redirect('/history')->with('success', 'Pembayaran berhasil!');
-        }
+        return redirect()->route('member.payment.index')
+            ->with('success', 'Pembayaran berhasil!');
     }
+
+    return back()->with('error', 'Jenis pembayaran tidak valid.');
+}
 }

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Member;
 
 use App\Models\Transaction;
-
+use App\Http\Controllers\Controller;
 class TransactionHistoryController extends Controller
 {
     public function index()
     {
-        $history = Transaction::where('buyer_id', auth()->id())
+        $transactions = Transaction::where('buyer_id', auth()->id())
+            ->with('details.product')
             ->latest()
             ->get();
 
-        return view('history.index', compact('history'));
+        return view('member.transactions.index', compact('transactions'));
     }
 
     public function show($id)

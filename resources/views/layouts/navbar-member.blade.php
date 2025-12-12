@@ -5,10 +5,6 @@
             <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
         </a>
 
-        <form action="/member/products" method="GET" class="d-none d-md-block flex-grow-1 mx-4">
-            <input type="text" name="search" class="form-control search-bar"
-                   placeholder="Cari produk...">
-        </form>
 
         <div class="d-flex align-items-center gap-3">
             <a href="/member/wallet" class="nav-link fw-semibold text-danger">Saldo</a>

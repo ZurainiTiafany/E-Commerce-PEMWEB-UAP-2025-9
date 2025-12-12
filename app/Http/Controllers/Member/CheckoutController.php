@@ -1,13 +1,15 @@
+<?php
 
+namespace App\Http\Controllers\Member;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\ShippingType;
+use App\Models\UserBalance;
+use App\Models\StoreBalance;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
 {
@@ -15,8 +17,9 @@ class CheckoutController extends Controller
     {
         $product = Product::findOrFail($request->product_id);
         $shippingTypes = ShippingType::all();
+        $qty = $request->qty ?? 1;
 
-        return view('checkout.index', compact('product', 'shippingTypes'));
+        return view('member.checkout.index', compact('product', 'shippingTypes', 'qty'));
     }
 
     public function process(Request $request)
@@ -24,43 +27,98 @@ class CheckoutController extends Controller
         $request->validate([
             'product_id'     => 'required',
             'shipping_type'  => 'required',
-            'payment_method' => 'required', // wallet or va
+            'payment_method' => 'required',
+            'address'        => 'required',
         ]);
 
-        $product = Product::findOrFail($request->product_id);
+        $qty = $request->qty ?? 1;
 
-        // Hitung shipping
-        $shippingType = ShippingType::find($request->shipping_type);
+        $product       = Product::findOrFail($request->product_id);
+        $shippingType  = ShippingType::findOrFail($request->shipping_type);
 
-        $shippingCost = $shippingType->price;
-        $total = $product->price + $shippingCost;
+        $shippingCost = $shippingType->cost;
+        $subtotal     = $product->price * $qty;
+        $total        = $subtotal + $shippingCost;
 
-        // Simpan transaksi
-        $transaction = Transaction::create([
-            'code' => 'TRX' . time(),
-            'buyer_id' => auth()->id(),
-            'store_id' => $product->store_id,
-            'shipping_type' => $shippingType->name,
-            'shipping_cost' => $shippingCost,
-            'grand_total' => $total,
-            'payment_status' => 'unpaid',
-        ]);
+        /**
+         * DATA DASAR TRANSAKSI
+         */
+        $transactionData = [
+            'code'           => 'TRX' . time(),
+            'buyer_id'       => auth()->id(),
+            'store_id'       => $product->store_id,
+            'shipping_type'  => $shippingType->name,
+            'shipping_cost'  => $shippingCost,
+            'grand_total'    => $total,
+            'tax'            => 0,
+            'address'        => $request->address,
+            'city'           => $request->city ?? 'Unknown',
+            'postal_code'    => $request->postal_code ?? '00000',
+            'address_id'     => 'ADDR' . time(),
+            'shipping'       => $shippingType->name,
+        ];
 
-        // Simpan detail transaksi
-        TransactionDetail::create([
-            'transaction_id' => $transaction->id,
-            'product_id' => $product->id,
-            'qty' => 1,
-            'subtotal' => $product->price,
-        ]);
+        /**
+         * -------------------------
+         *  1. Pembayaran PAKAI WALLET
+         * -------------------------
+         */
+        if ($request->payment_method === 'wallet') {
 
-        // Jika bayar pakai VA → generate kode VA
-        if ($request->payment_method === 'va') {
-            $transaction->update([
-                'va_number' => rand(1000000000, 9999999999)
+            $wallet = UserBalance::firstOrCreate(
+                ['user_id' => auth()->id()],
+                ['balance' => 0]
+            );
+
+            if ($wallet->balance < $total) {
+                return back()->with('error', 'Saldo tidak cukup. Silakan topup terlebih dahulu.');
+            }
+
+            // Potong saldo
+            $wallet->decrement('balance', $total);
+
+            // Set transaksi langsung paid
+            $transactionData['payment_status'] = 'paid';
+
+            $transaction = Transaction::create($transactionData);
+
+            // Tambah detail transaksi
+            TransactionDetail::create([
+                'transaction_id' => $transaction->id,
+                'product_id'     => $product->id,
+                'qty'            => $qty,
+                'subtotal'       => $subtotal,
             ]);
+
+            // Tambahkan dana ke seller
+            StoreBalance::addToStore($product->store_id, $total);
+
+            return redirect()->route('member.transactions.index')
+                ->with('success', 'Pembayaran berhasil menggunakan saldo (wallet).');
         }
 
-        return redirect()->route('payment.page', $transaction->id);
+        /**
+         * -------------------------
+         *  2. Pembayaran PAKAI VA (Transfer)
+         * -------------------------
+         */
+
+        $transactionData['payment_status'] = 'unpaid';
+
+        $transaction = Transaction::create($transactionData);
+
+        TransactionDetail::create([
+            'transaction_id' => $transaction->id,
+            'product_id'     => $product->id,
+            'qty'            => $qty,
+            'subtotal'       => $subtotal,
+        ]);
+
+        // Generate Nomor VA
+        $transaction->update([
+            'va_number' => rand(1000000000, 9999999999)
+        ]);
+
+        return redirect()->route('member.payment.page', $transaction->id);
     }
 }

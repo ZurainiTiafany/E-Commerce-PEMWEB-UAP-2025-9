@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Member;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductCategory;
 
@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $categories = ProductCategory::all();
 
-        $products = Product::with('store', 'images')
+        $products = Product::with('store', 'productImages')
             ->latest()
             ->paginate(12);
 
@@ -20,12 +20,14 @@ class ProductController extends Controller
     }
 
     // DETAIL PRODUK
-    public function show($slug)
-    {
-        $product = Product::with(['store', 'images', 'reviews.user'])
-            ->where('slug', $slug)
-            ->firstOrFail();
+    public function show($id)
+{
+    $product = Product::with([
+        'store',
+        'productImages',
+        'reviews' // <— tambah ini
+    ])->findOrFail($id);
 
-        return view('products.show', compact('product'));
-    }
+    return view('member.products.show', compact('product'));
+}
 }

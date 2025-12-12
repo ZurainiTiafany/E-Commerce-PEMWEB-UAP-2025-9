@@ -88,30 +88,33 @@ Route::middleware(['auth', 'member'])
     // Dashboard member
     Route::get('/dashboard', [MemberDashboardController::class, 'index'])->name('dashboard');
 
-    // Registrasi Store (Seller)
-    Route::get('/store/register', [StoreRegistrationController::class, 'create'])->name('store.register');
-    Route::post('/store/register', [StoreRegistrationController::class, 'store'])->name('store.store');
-
+    
     // ==============================
     // PRODUCT (List & Detail)
     // ==============================
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
-    // ==============================
-    // CHECKOUT
-    // ==============================
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    // checkout
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 
-    // ==============================
-    // PAYMENT
-    // ==============================
-    Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+// cart add
+Route::post('/cart/add', [App\Http\Controllers\Member\CartController::class, 'add'])->name('cart.add');
 
-    // ==============================
-    // WALLET
-    // ==============================
-    Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
+// payment (VA page)
+Route::get('/payment/{id}', [PaymentController::class, 'show'])->name('payment.page');
+Route::post('/payment/{id}/pay', [PaymentController::class, 'confirmPayment'])->name('payment.process');
+Route::get('/payment', [PaymentController::class, 'paymentPage'])->name('payment.page');
+Route::post('/payment/check', [PaymentController::class, 'checkVA'])->name('payment.check');
+Route::post('/payment/confirm/{type}/{id}', [PaymentController::class, 'confirmVA'])->name('payment.confirm');
+    
+
+// WALLET
+Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
+Route::post('/wallet/topup', [WalletController::class, 'createVA'])->name('wallet.topup');
+Route::get('/wallet/pay/{transaction}', [WalletController::class, 'pay'])->name('wallet.pay');
+Route::post('/wallet/pay/{transaction}', [WalletController::class, 'simulatePayment'])->name('wallet.simulate');
 
     // ==============================
     // TRANSACTION HISTORY
