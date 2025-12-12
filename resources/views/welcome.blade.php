@@ -17,7 +17,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 #bannerCarousel {
-    margin-top: 90px; /* sesuaikan tinggi navbar kamu */
+    margin-top: 90px; 
 }
         body {
             background-color: #FFFFFF;
@@ -65,7 +65,6 @@
     transition: background-color .2s ease, color .2s ease, transform .15s ease;
 }
 
-/* LOGIN = outline */
 .btn-login {
     background: #A4133C;
     color: white;
@@ -82,7 +81,6 @@
 }
 
 
-/* LOGIN = outline */
 .btn-register {
     background: #FFFFFF;
     color: #A4133C;
@@ -133,20 +131,17 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 }
 
 
-/* Container gambar kategori (1 baris) */
 .kategori-container {
     display: flex;
     justify-content: center;
     gap: 30px;
-    flex-wrap: nowrap; /* biar tetap satu baris */
+    flex-wrap: nowrap; 
 }
 
-/* Item per kategori */
 .kategori-item {
     text-align: center;
 }
 
-/* Gambar kategori */
 .kategori-item img {
     width: 180px;
     height: 180px;
@@ -154,22 +149,20 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     border-radius: 12px;
     transition: 0.3s ease;
     cursor: pointer;
-    border: 3px solid transparent; /* default border tidak terlihat */
+    border: 3px solid transparent; 
 }
 
-/* Hover: border berubah warna (glow effect) */
 .kategori-item:hover img {
     border-color: #A4133C;
     box-shadow: 0 0 12px rgba(164, 19, 60, 0.4);
     transform: scale(1.03);
 }
 
-/* Hilangkan tulisan / card ::after */
+
 .kategori-item::after {
     content: none !important;
 }
 
-/* Nama kategori */
 .kategori-item p {
     margin-top: 12px;
     font-size: 16px;
@@ -177,7 +170,7 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     color: #333;
 }
 
-/* Hilangkan underline link */
+
 .kategori-link {
     text-decoration: none;
     color: inherit;
@@ -199,8 +192,8 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 }
 
 .product-card .card-title {
-    min-height: 48px; /* atur tinggi minimum */
-    font-size: 14px;  /* kecilin tulisan */
+    min-height: 48px;
+    font-size: 14px;  
     line-height: 1.3;
 }
 
@@ -223,7 +216,7 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 }
 .product-price {
     font-size: 15px;
-    font-weight: 700; /* lebih bold */
+    font-weight: 700; 
     color: #333;
     margin-bottom: 12px;
 }
@@ -258,21 +251,16 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 
 <body>
 
-{{-- NAVBAR --}}
 <nav class="navbar navbar-expand-lg shadow-sm px-4 fixed-nav">
     <div class="container-fluid">
 
-        <!-- Logo kiri -->
         <a class="navbar-brand d-flex align-items-center" href="/">
             <img src="{{ asset('assets/images/logo.png') }}" 
                  alt="Ethereal Stationery" 
                  style="width: 70px; height: auto;">
         </a>
 
-
-        <!-- Isi navbar -->
         <div class="collapse navbar-collapse" id="navMenu">
-            <!-- Pendorong agar tombol pindah ke kanan -->
             <div class="ms-auto d-flex gap-2">
 
                 <a href="{{ route('login') }}" 
@@ -292,26 +280,22 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 </nav>
 
 
-<!-- Banner Slider -->
 <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
     
-    <!-- TITIK INDICATOR -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
     </div>
 
-    <!-- SLIDES -->
+
     <div class="carousel-inner">
 
-        <!-- SLIDE 1 -->
         <div class="carousel-item active">
             <img src="{{ asset('assets/images/banner 1.png') }}" 
                  class="d-block banner-img">
         </div>
 
-        <!-- SLIDE 2 -->
         <div class="carousel-item">
             <img src="{{ asset('assets/images/banner 2.png') }}" 
                  class="d-block banner-img">
@@ -324,7 +308,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             </div>
         </div>
 
-        <!-- SLIDE 3 -->
         <div class="carousel-item">
             <img src="{{ asset('assets/images/banner 3.png') }}" 
                  class="d-block banner-img">
@@ -338,7 +321,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
         </div>
     </div>
 
-    <!-- PANAH -->
     <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </button>
@@ -348,9 +330,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 </div>
 
 
-
-{{-- KATEGORI --}}
-<!-- SECTION KATEGORI -->
 <section class="kategori-produk">
     <h2>Kategori Produk</h2>
 
@@ -395,15 +374,11 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 </section>
 
 
-
-
-{{-- PRODUK DUMMY --}}
 <section class="container my-5">
     <h3 class="fw-bold text-center mb-4" style="color: #A4133C;">Produk Terbaru</h3>
 
     <div class="row g-4">
 
-        <!-- PRODUK 1 -->
         <div class="col-md-3">
             <div class="card product-card">
                 <img src="{{ asset('assets/images/1/zebra-sarasa-1.jpg') }}" class="card-img-top">
@@ -417,7 +392,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             </div>
         </div>
 
-        <!-- PRODUK 2 -->
         <div class="col-md-3">
             <div class="card product-card">
                 <img src="{{ asset('assets/images/3/sidu-38-lembar.jpg') }}" class="card-img-top">
@@ -430,7 +404,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             </div>
         </div>
 
-        <!-- PRODUK 3 -->
         <div class="col-md-3">
             <div class="card product-card">
                 <img src="{{ asset('assets/images/5/castell-9000.jpg') }}" class="card-img-top">
@@ -443,7 +416,6 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
             </div>
         </div>
 
-        <!-- PRODUK 4 -->
         <div class="col-md-3">
             <div class="card product-card">
                 <img src="{{ asset('assets/images/9/washie-tape-pastel.jpeg') }}" class="card-img-top">
@@ -458,7 +430,8 @@ text-shadow: 0 3px 8px rgba(0,0,0,0.7);
 
     </div>
     </section>
-    <!-- FOOTER -->
+
+    
 <footer class="footer-ethereal mt-5">
     <div class="container text-center">
 

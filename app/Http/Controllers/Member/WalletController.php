@@ -13,13 +13,11 @@ class WalletController extends Controller
 {
     public function index()
 {
-    // Ambil wallet berdasarkan user_id
     $wallet = Wallet::firstOrCreate(
         ['user_id' => auth()->id()],
         ['balance' => 0]
     );
 
-    // Ambil riwayat transaksi user
     $history = WalletTransaction::where('user_id', auth()->id())
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -33,7 +31,6 @@ class WalletController extends Controller
             'amount' => 'required|numeric|min:1000'
         ]);
 
-        // Buat VA unik
         $va = 'VA' . now()->timestamp . rand(100, 999);
 
         $trx = WalletTransaction::create([
@@ -48,13 +45,11 @@ class WalletController extends Controller
 
     public function pay(WalletTransaction $transaction)
 {
-    // Ambil atau buat wallet user
     $wallet = Wallet::firstOrCreate(
         ['user_id' => auth()->id()],
         ['balance' => 0]
     );
 
-    // Ambil riwayat top up user
     $history = WalletTransaction::where('user_id', auth()->id())
         ->orderBy('id', 'desc')
         ->get();
@@ -71,16 +66,13 @@ class WalletController extends Controller
 
     DB::transaction(function () use ($transaction) {
 
-        // Update transaksi menjadi paid
         $transaction->update(['status' => 'paid']);
 
-        // Ambil wallet user
         $wallet = Wallet::firstOrCreate(
             ['user_id' => $transaction->user_id],
             ['balance' => 0]
         );
 
-        // Tambah saldo user
         $wallet->update([
             'balance' => $wallet->balance + $transaction->amount
         ]);

@@ -12,14 +12,12 @@
 
                 <h3 class="text-lg font-semibold mb-4">Form Pendaftaran Toko</h3>
 
-                <!-- Success Message -->
                 @if(session('success'))
                     <div class="mb-4 p-3 bg-green-200 text-green-800 rounded">
                         {{ session('success') }}
                     </div>
                 @endif
 
-                <!-- Error Message -->
                 @if ($errors->any())
                     <div class="mb-4 p-3 bg-red-200 text-red-800 rounded">
                         <ul class="list-disc pl-5">
@@ -35,7 +33,6 @@
 
                     @csrf
 
-                    <!-- Nama Toko -->
                     <div class="mb-4">
                         <label class="block font-medium mb-1">Nama Toko</label>
                         <input type="text" name="store_name"
@@ -44,7 +41,6 @@
                                placeholder="Masukkan nama toko">
                     </div>
 
-                    <!-- Alamat -->
                     <div class="mb-4">
                         <label class="block font-medium mb-1">Alamat Toko</label>
                         <textarea name="address"
@@ -52,7 +48,6 @@
                                   placeholder="Alamat lengkap toko">{{ old('address') }}</textarea>
                     </div>
 
-                    <!-- Nomor Telepon -->
                     <div class="mb-4">
                         <label class="block font-medium mb-1">Nomor Telepon</label>
                         <input type="text" name="phone"
@@ -61,7 +56,6 @@
                                placeholder="08123456789">
                     </div>
 
-                    <!-- Deskripsi -->
                     <div class="mb-4">
                         <label class="block font-medium mb-1">Deskripsi Toko</label>
                         <textarea name="description"
@@ -69,13 +63,11 @@
                                   placeholder="Ceritakan tentang toko Anda">{{ old('description') }}</textarea>
                     </div>
 
-                    <!-- Upload Logo -->
                     <div class="mb-4">
                         <label class="block font-medium mb-1">Logo Toko (Opsional)</label>
                         <input type="file" name="logo" class="w-full">
                     </div>
 
-                    <!-- Submit -->
                     <div class="mt-6">
                         <button type="submit"
                             class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">

@@ -55,20 +55,17 @@
 
 <hr>
 
-<!-- FORM CHECKOUT -->
 <form action="{{ route('member.checkout.process') }}" method="POST">
     @csrf
 
     <input type="hidden" name="product_id" value="{{ $product->id }}">
     <input type="hidden" name="qty" value="{{ $qty }}">
 
-            <!-- ALAMAT -->
             <div class="mt-3">
                 <label class="label">Alamat Pengiriman</label>
                 <input type="text" name="address" class="form-control" placeholder="Masukkan alamat lengkap" required>
             </div>
 
-            <!-- ONGKIR -->
             <div class="mt-4">
                 <label class="label">Jenis Pengiriman</label>
                 <select name="shipping_type" class="form-control" required id="shippingSelector">
@@ -84,7 +81,6 @@
                 </select>
             </div>
 
-            <!-- METODE PEMBAYARAN -->
             <div class="mt-4">
                 <label class="label">Metode Pembayaran</label>
                 <select name="payment_method" class="form-control" required>
@@ -96,7 +92,6 @@
 
             <hr class="my-4">
 
-            <!-- RINCIAN TOTAL -->
             <h5 class="fw-bold">Rincian Pembayaran</h5>
 
             <p>Subtotal  

@@ -7,7 +7,6 @@ use App\Models\ProductCategory;
 
 class ProductController extends Controller
 {
-    // HOME PAGE
     public function index()
     {
         $categories = ProductCategory::all();
@@ -19,13 +18,12 @@ class ProductController extends Controller
         return view('products.index', compact('products', 'categories'));
     }
 
-    // DETAIL PRODUK
     public function show($id)
 {
     $product = Product::with([
         'store',
         'productImages',
-        'reviews' // <— tambah ini
+        'reviews' 
     ])->findOrFail($id);
 
     return view('member.products.show', compact('product'));

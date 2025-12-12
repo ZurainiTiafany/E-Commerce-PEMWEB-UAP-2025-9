@@ -47,9 +47,9 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     .footer-ethereal {
-    background-color: #FFF0F3; /* Pink pastel */
+    background-color: #FFF0F3; 
     padding: 40px 0;
-    border-top: 2px solid #f5d7dd; /* Pink soft */
+    border-top: 2px solid #f5d7dd; 
     margin-top: 60px;
 }
 
@@ -76,7 +76,6 @@
 
     <div class="row g-4">
 
-        <!-- ============ KOLOM GAMBAR ============ -->
         <div class="col-md-6">
 
             <div class="product-gallery mb-3">
@@ -97,7 +96,6 @@
 
         </div>
 
-        <!-- ============ KOLOM DETAIL PRODUK ============ -->
         <div class="col-md-6">
 
             <div class="product-card">
@@ -121,7 +119,6 @@
 
                 <hr>
 
-                <!-- FORM QTY & BELI -->
                 <form action="{{ route('member.cart.add') }}" method="POST">
                     @csrf
 
@@ -144,7 +141,6 @@
                         <button type="button" class="btn btn-light" id="btn-plus">+</button>
                     </div>
 
-                    <<!-- FORM ADD TO CART -->
 <form action="{{ route('member.cart.add') }}" method="POST">
     @csrf
     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -153,8 +149,6 @@
     
 </form>
 
-
-<!-- FORM BUY NOW -->
 <form action="{{ route('member.checkout.index') }}" method="GET" id="buyNowForm">
     <input type="hidden" name="product_id" value="{{ $product->id }}">
     <input type="hidden" name="qty" id="qtyInput" value="1">
@@ -166,7 +160,6 @@
 
             </div>
 
-            <!-- ============ REVIEW PRODUK ============ -->
             <div class="mt-4">
                 <h4 class="fw-bold mb-3">Review Produk</h4>
 
@@ -222,7 +215,7 @@
     const minus = document.getElementById('btn-minus');
     const plus = document.getElementById('btn-plus');
     const qty = document.getElementById('quantity');
-    const qtyInput = document.getElementById('qtyInput'); // untuk Buy Now
+    const qtyInput = document.getElementById('qtyInput');
 
     minus.addEventListener('click', () => {
         if (qty.value > 1) qty.value--;

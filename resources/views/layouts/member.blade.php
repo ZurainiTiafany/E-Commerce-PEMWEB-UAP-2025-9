@@ -18,11 +18,11 @@
             
         }
         html {
-        font-size: 14px; /* dari 16px → lebih kecil */
+        font-size: 14px; 
     }
 
     h2, h3, h4 {
-        font-size: 1.7rem !important; /* kecilkan judul */
+        font-size: 1.7rem !important; 
     }
         .navbar {
             border-bottom: 2px solid #f5d7dd;
@@ -41,13 +41,11 @@
 
 <body>
 
-    {{-- NAVBAR --}}
+
     @include('layouts.navbar-member')
 
-    {{-- SPACER BIAR KONTEN TURUN --}}
     <div style="height: 90px;"></div>
 
-    {{-- MAIN CONTENT --}}
     <div class="container py-4">
         @yield('content')
     </div>

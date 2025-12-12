@@ -28,27 +28,21 @@ use App\Http\Middleware\AdminOnly;
 // LOGIN UMUM (USER BIASA)
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-// =====================
+
 // Home
-// =====================
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// =====================
-// LOGIN MANUAL ADMIN
-// =====================
+
+// Login admin
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.process');
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 
-
-
-
-// =====================
-// ADMIN ROUTES
-// =====================
+// Admin Routes
 Route::middleware(['auth', AdminOnly::class])
     ->prefix('admin')
     ->name('admin.')
@@ -77,9 +71,7 @@ Route::middleware(['auth', AdminOnly::class])
     Route::post('/verification/reject/{id}', [StoreVerificationController::class, 'reject'])->name('verification.reject');
 });
 
-// =====================
-// MEMBER ROUTES
-// =====================
+// Member Routes
 Route::middleware(['auth', 'member'])
     ->prefix('member')
     ->name('member.')
@@ -88,10 +80,7 @@ Route::middleware(['auth', 'member'])
     // Dashboard member
     Route::get('/dashboard', [MemberDashboardController::class, 'index'])->name('dashboard');
 
-    
-    // ==============================
-    // PRODUCT (List & Detail)
-    // ==============================
+    // Product (List & Detail)
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
@@ -110,18 +99,54 @@ Route::post('/payment/check', [PaymentController::class, 'checkVA'])->name('paym
 Route::post('/payment/confirm/{type}/{id}', [PaymentController::class, 'confirmVA'])->name('payment.confirm');
     
 
-// WALLET
+// Wallet
 Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
 Route::post('/wallet/topup', [WalletController::class, 'createVA'])->name('wallet.topup');
 Route::get('/wallet/pay/{transaction}', [WalletController::class, 'pay'])->name('wallet.pay');
 Route::post('/wallet/pay/{transaction}', [WalletController::class, 'simulatePayment'])->name('wallet.simulate');
 
-    // ==============================
-    // TRANSACTION HISTORY
-    // ==============================
+    // Transaction History
     Route::get('/transactions', [TransactionHistoryController::class, 'index'])->name('transactions.index');
 });
-// =====================
+
+
+    // Seller Routes 
+Route::middleware(['auth', 'seller'])
+    ->prefix('seller')
+    ->name('seller.')
+    ->group(function () {
+         Route::get('/dashboard', [MemberDashboardController::class, 'index'])->name('dashboard');
+        
+
+        // Dashboard Seller
+        Route::get('/dashboard', [\App\Http\Controllers\Seller\SellerDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        // Profile Store
+        Route::get('/profile', [\App\Http\Controllers\Seller\SellerProfileController::class, 'index'])
+            ->name('profile');
+
+        // Categories
+        Route::resource('/categories', \App\Http\Controllers\Seller\SellerCategoryController::class);
+
+        // Products
+        Route::resource('/products', \App\Http\Controllers\Seller\SellerProductController::class);
+
+        // Orders
+        Route::get('/orders', [\App\Http\Controllers\Seller\SellerOrderController::class, 'index'])
+            ->name('orders');
+
+        // Balance
+        Route::get('/balance', [\App\Http\Controllers\Seller\SellerBalanceController::class, 'index'])
+            ->name('balance');
+
+        // Withdrawals
+        Route::resource('/withdrawals', \App\Http\Controllers\Seller\SellerWithdrawalController::class);
+    });
+
+
+
+
+
 // Aktifkan Breeze
-// =====================
 require __DIR__.'/auth.php';

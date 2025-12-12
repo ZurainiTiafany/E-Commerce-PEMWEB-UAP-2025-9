@@ -12,10 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
-        // REGISTER ALIAS MIDDLEWARE DI SINI
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminOnly::class,
             'member' => \App\Http\Middleware\MemberOnly::class,
+            'seller' => \App\Http\Middleware\SellerOnly::class,
+
         ]);
     
     })

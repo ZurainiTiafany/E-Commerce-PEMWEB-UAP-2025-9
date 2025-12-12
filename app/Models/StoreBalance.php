@@ -22,14 +22,12 @@ class StoreBalance extends Model
         ['balance' => 0]
     );
 
-    // Tambah saldo
     $balance->balance += $amount;
     $balance->save();
 
-    // Catat history
     StoreBalanceHistory::create([
         'store_balance_id' => $balance->id,
-        'type' => 'in',   // <= penting!
+        'type' => 'in',   
         'reference_id' => null,
         'reference_type' => 'transaction',
         'amount' => $amount,
@@ -39,7 +37,6 @@ class StoreBalance extends Model
     return $balance;
 }
 
-    // relationships
     public function store()
     {
         return $this->belongsTo(Store::class);

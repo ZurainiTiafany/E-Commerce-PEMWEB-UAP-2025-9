@@ -1,12 +1,10 @@
 <x-guest-layout>
 
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" 
@@ -16,7 +14,6 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
@@ -28,7 +25,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" 
@@ -47,7 +43,6 @@
                 </a>
             @endif
 
-            <!-- Login Button -->
             <button 
                 class="ml-4 px-6 py-2 bg-[#A4133C] text-white rounded-lg shadow hover:bg-[#82102F] transition duration-200">
                 {{ __('Log in') }}

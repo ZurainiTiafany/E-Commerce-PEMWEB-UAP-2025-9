@@ -5,7 +5,7 @@
     body {
         font-size: 14px !important;
     }
-    /* CARD SALDO */
+
     .wallet-card {
         background: #FFF0F3;
         border: 2px solid #A4133C;
@@ -25,7 +25,6 @@
         margin-top: 10px;
     }
 
-    /* QUICK BUTTON NOMINAL */
     .nominal-btn {
         background: #A4133C;
         color: white;
@@ -41,14 +40,12 @@
         box-shadow: 0 5px 10px rgba(164,19,60,0.25);
     }
 
-    /* FORM INPUT */
     .wallet-input {
         border: 2px solid #A4133C;
         padding: 10px;
         border-radius: 10px;
     }
 
-    /* TOMBOL BUAT VA */
     .wallet-submit {
         background: #A4133C;
         color: white;
@@ -65,7 +62,6 @@
         box-shadow: 0 5px 10px rgba(164,19,60,0.25);
     }
 
-    /* TABLE */
     .wallet-table th {
         color: #A4133C;
         font-weight: 700;
@@ -81,17 +77,14 @@
 
 <div class="container mt-4">
 
-    {{-- SALDO --}}
     <div class="wallet-card mb-4">
         <h3 class="wallet-title">Saldo Wallet</h3>
         <p class="wallet-balance">Rp {{ number_format($wallet->balance, 0, ',', '.') }}</p>
     </div>
 
-    {{-- TOP UP --}}
     <div class="wallet-card mb-4">
         <h3 class="wallet-title mb-3">Top Up Saldo</h3>
 
-        {{-- NOMINAL CEPAT --}}
         <div class="row g-2 mb-3">
             @foreach ([10000,20000,50000,100000,200000,500000] as $nom)
             <div class="col-4">
@@ -103,7 +96,6 @@
             @endforeach
         </div>
 
-        {{-- FORM NOMINAL CUSTOM --}}
         <form action="{{ route('member.wallet.topup') }}" method="POST">
             @csrf
             <input id="amount" name="amount" type="number"
@@ -114,7 +106,6 @@
         </form>
     </div>
 
-    {{-- RIWAYAT --}}
     <div class="wallet-card mb-5">
         <h3 class="wallet-title mb-3">Riwayat Top Up</h3>
 

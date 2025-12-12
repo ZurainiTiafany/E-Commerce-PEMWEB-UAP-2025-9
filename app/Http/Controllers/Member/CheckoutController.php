@@ -40,9 +40,6 @@ class CheckoutController extends Controller
         $subtotal     = $product->price * $qty;
         $total        = $subtotal + $shippingCost;
 
-        /**
-         * DATA DASAR TRANSAKSI
-         */
         $transactionData = [
             'code'           => 'TRX' . time(),
             'buyer_id'       => auth()->id(),
@@ -58,11 +55,6 @@ class CheckoutController extends Controller
             'shipping'       => $shippingType->name,
         ];
 
-        /**
-         * -------------------------
-         *  1. Pembayaran PAKAI WALLET
-         * -------------------------
-         */
         if ($request->payment_method === 'wallet') {
 
             $wallet = UserBalance::firstOrCreate(
@@ -74,15 +66,12 @@ class CheckoutController extends Controller
                 return back()->with('error', 'Saldo tidak cukup. Silakan topup terlebih dahulu.');
             }
 
-            // Potong saldo
             $wallet->decrement('balance', $total);
 
-            // Set transaksi langsung paid
             $transactionData['payment_status'] = 'paid';
 
             $transaction = Transaction::create($transactionData);
 
-            // Tambah detail transaksi
             TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'product_id'     => $product->id,
@@ -90,18 +79,13 @@ class CheckoutController extends Controller
                 'subtotal'       => $subtotal,
             ]);
 
-            // Tambahkan dana ke seller
             StoreBalance::addToStore($product->store_id, $total);
 
             return redirect()->route('member.transactions.index')
                 ->with('success', 'Pembayaran berhasil menggunakan saldo (wallet).');
         }
 
-        /**
-         * -------------------------
-         *  2. Pembayaran PAKAI VA (Transfer)
-         * -------------------------
-         */
+
 
         $transactionData['payment_status'] = 'unpaid';
 
@@ -114,7 +98,6 @@ class CheckoutController extends Controller
             'subtotal'       => $subtotal,
         ]);
 
-        // Generate Nomor VA
         $transaction->update([
             'va_number' => rand(1000000000, 9999999999)
         ]);

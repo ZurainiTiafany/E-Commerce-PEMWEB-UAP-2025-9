@@ -12,7 +12,7 @@ class CartController extends Controller
 {
     $product = Product::findOrFail($request->product_id);
 
-    $qty = $request->quantity; // ← BENAR
+    $qty = $request->quantity; 
 
     $cart = session()->get('cart', []);
 

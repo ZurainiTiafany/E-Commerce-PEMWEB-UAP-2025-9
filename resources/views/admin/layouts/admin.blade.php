@@ -15,7 +15,6 @@
             padding-top: 90px;
         }
 
-        /* NAVBAR ALIGN FIX */
         .admin-nav {
     background-color: #FFFFFF;
     padding: 15px 30px;
@@ -24,35 +23,33 @@
     justify-content: space-between;
     align-items: center;
 
-    position: fixed;       /* 🔥 ini bikin navbar tetap di atas */
+    position: fixed;     
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999;          /* 🔥 biar selalu di depan konten lain */
+    z-index: 999;          
 }
 
-/* LOGO SIZE */
+
 .admin-logo {
-    width: 45px;          /* Ubah ukuran logo di sini */
+    width: 45px;          
     height: auto;
 }
 
-/* ADMIN PANEL TITLE SIZE */
 .nav-title {
-    font-size: 20px;      /* kecilkan di sini */
+    font-size: 20px;      
     font-weight: 700;
     color: #A4133C;
     margin-left: 10px;
 }
 
-/* MENU DI TENGAH */
+
 .admin-menu {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-/* MENU LINK */
 .admin-menu a {
     color: #A4133C;
     font-weight: 500;
@@ -76,7 +73,6 @@
             background-color: #8f0f32;
         }
 
-        /* FOOTER */
         .footer-ethereal {
             background-color: #FFF0F3;
             padding: 40px 0;

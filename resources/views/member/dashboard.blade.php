@@ -2,7 +2,7 @@
 
 @push('styles')
 <style>
-    /* Section Kategori */
+
     .kategori-produk h2 {
         font-weight: 700;
         color: #A4133C;
@@ -29,48 +29,46 @@
         color: white;
         transform: translateY(-3px);
     }
-    /* Jarak judul kategori */
+
 .kategori-produk h2 {
     font-weight: 700;
     color: #A4133C;
     margin-bottom: 35px;
-    margin-top: 60px; /* tambah jarak dari greeting card */
+    margin-top: 60px; 
 }
 
-/* Container kategori */
+
 .kategori-container {
     display: flex;
     justify-content: center;
-    gap: 40px; /* jarak antar card kategori */
+    gap: 40px;
     flex-wrap: wrap;
 }
 
-/* Card kategori */
+
 .kategori-item {
-    background-color: #A4133C;       /* warna maroon */
-    color: white;                    /* tulisan putih */
+    background-color: #A4133C;       
+    color: white;                   
     padding: 15px 35px;
-    border-radius: 20px;             /* lebih tumpul */
+    border-radius: 20px;            
     font-size: 16px;
     font-weight: 600;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     transition: 0.2s;
-    min-width: 150px;     /* biar muat 1 baris */
-    padding: 12px 20px;   /* lebih besar & rapi */
+    min-width: 150px;     
+    padding: 12px 20px;   
     text-align: center;
 }
 
 .kategori-item p {
-    white-space: nowrap;  /* cegah teks turun baris */
+    white-space: nowrap;  
 }
 
-/* Hover effect */
 .kategori-item:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.12);
 }
 
-/* --- BUTTON DETAIL --- */
 .detail-btn {
     background-color: #A4133C !important;
     color: white !important;
@@ -89,7 +87,6 @@
     box-shadow: 0 4px 10px rgba(164, 19, 60, 0.3);
 }
 
-/* --- CARD PRODUCT WRAPPER --- */
 .product-card {
     background: #FFE6EC;
     border: 2px solid #A4133C;
@@ -100,7 +97,6 @@
     flex-direction: column;
 }
 
-/* --- GAMBAR PRODUK --- */
 .product-card img {
     width: 100%;
     height: 220px;
@@ -109,7 +105,6 @@
 }
 
 
-/* --- BODY CARD --- */
 .product-card .p-3 {
     display: flex;
     flex-direction: column;
@@ -117,7 +112,6 @@
     flex: 1;
 }
 
-/* --- CATEGORY --- */
 .product-category, 
 .product-card small {
     font-size: 14px;
@@ -127,7 +121,6 @@
     display: block;
 }
 
-/* --- JUDUL PRODUK --- */
 .product-card h5,
 .product-card .card-title {
     min-height: 48px;
@@ -135,7 +128,6 @@
     line-height: 1.3;
 }
 
-/* --- HARGA PRODUK --- */
 .product-price,
 .product-card p {
     font-size: 15px;
@@ -166,13 +158,39 @@
     font-size: 13px;
     margin-top: 10px;
 }
+
+
+
+.seller-btn {
+    margin-top: 20px; 
+    display: inline-block; 
+}
+.seller-btn {
+    text-decoration: none; 
+}
+.seller-btn {
+    border-radius: 12px; 
+    padding: 10px 25px;  
+    font-weight: 600;
+    background-color: #A4133C;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.seller-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(164, 19, 60, 0.3);
+}
+
+
 </style>
 @endpush
 
 
 @section('content')
 
-{{-- GREETING CARD --}}
+
+
 <div class="container mt-4">
     <div class="card shadow-sm border-0"
          style="border-radius: 15px; background-color:#FFF0F3;">
@@ -187,7 +205,6 @@
     </div>
 </div>
 
-{{-- KATEGORI --}}
 <section class="kategori-produk container">
     <h2>Kategori Produk</h2>
 
@@ -201,7 +218,6 @@
 </section>
 
 
-{{-- PRODUK --}}
 <section class="container my-5">
     <h3 class="fw-bold text-center mb-4" style="color:#A4133C">Produk Terbaru</h3>
 
@@ -237,10 +253,15 @@
         </div>
         @endforeach
     </div>
+
+    <a href="{{ route('seller.dashboard') }}" class="seller-btn">
+        Ke Dashboard Seller
+    </a>
+
+
 </section>
 
 
-<!-- FOOTER -->
 <footer class="footer-ethereal mt-5">
     <div class="container text-center">
 

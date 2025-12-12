@@ -8,18 +8,12 @@ use App\Models\Store;
 
 class StoreManagementController extends Controller
 {
-    // ===========================
-    // LIST STORE
-    // ===========================
     public function index()
     {
         $stores = Store::all();
         return view('admin.stores.index', compact('stores'));
     }
 
-    // ===========================
-    // TAMPIL FORM TAMBAH STORE
-    // ===========================
     public function create()
 {
     return view('admin.stores.create');
